@@ -4,4 +4,4 @@
 
 var message = require('./script1');
 
-document.write(message);
+document.write(`This is formatted with ES6 ${message}`);

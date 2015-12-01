@@ -8,7 +8,7 @@ class App extends React.Component{
     constructor(){
         super();
         this.state = {
-            message: [
+            messages: [
                 'hi there how are you?',
                 'I am fine, and you?'
             ]

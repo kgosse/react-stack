@@ -8,15 +8,15 @@ module.exports = {
     devtool: 'eval-source-map',
     entry: {
         main: [
-            'webpack-dev-server/client?http://localhost:8080',
-            'webpack/hot/only-dev-server',
+            //'webpack-dev-server/client?http://localhost:8080',
+            //'webpack/hot/only-dev-server',
             './src/main.js'
         ]
     },
     output: {
-        filename: '[name].js',
-        path: path.join(__dirname, 'public'),
-        publicPath: '/public/'
+        filename: './public/[name].js',
+        //path: path.join(__dirname, 'public'),
+        //publicPath: '/public/'
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
@@ -26,8 +26,8 @@ module.exports = {
         loaders: [
             {
                 test: /\.jsx?$/,
-                include: path.join(__dirname, 'src'),
-                loader: 'react-hot!babel-loader'
+                exclude: /node_modules/,
+                loader: 'babel'
             }
         ]
     }

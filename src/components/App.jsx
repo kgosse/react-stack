@@ -2,7 +2,7 @@
  * Created by kevin gosse on 26/11/2015.
  */
 
-var React = require('react').react;
+import React from 'react';
 
 class App extends React.Component{
     constructor(){

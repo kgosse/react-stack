@@ -15,13 +15,21 @@ class MessageList extends React.Component{
 
         this.firebaseRef = new firebase('https://kg-react-stack.firebaseio.com/messages');
         this.firebaseRef.once("value", (dataSnapshot)=>{
-            var messages = dataSnapshot.val();
-            var res = [];
-            messages.forEach((m)=>{
-                res.push(m.message);
-            });
+            var messagesVal = dataSnapshot.val();
+            var messages = _(messagesVal)
+                .keys()
+                .map((messageKey)=>{
+                    var cloned = _.clone(messagesVal[messageKey]);
+                    cloned.key = messageKey;
+                    return cloned;
+                })
+                .value();
+            /*            var res = [];
+             messages.forEach((m)=>{
+             res.push(m.message);
+             });*/
             this.setState({
-                messages: res
+                messages: messages.map((v)=> v.message)
             });
         });
     }

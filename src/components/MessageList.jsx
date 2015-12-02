@@ -10,32 +10,31 @@ class MessageList extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            messages: []
+            messages: {}
         };
 
         this.firebaseRef = new firebase('https://kg-react-stack.firebaseio.com/messages');
-        this.firebaseRef.once("value", (dataSnapshot)=>{
-            var messagesVal = dataSnapshot.val();
-            var messages = _(messagesVal)
-                .keys()
-                .map((messageKey)=>{
-                    var cloned = _.clone(messagesVal[messageKey]);
-                    cloned.key = messageKey;
-                    return cloned;
-                })
-                .value();
-            /*            var res = [];
-             messages.forEach((m)=>{
-             res.push(m.message);
-             });*/
-            this.setState({
-                messages: messages.map((v)=> v.message)
-            });
+
+        this.firebaseRef.on("child_added", (msg)=>{
+            if(this.state.messages[msg.key()]){
+                return;
+            }
+
+            let msgVal = msg.val();
+            msgVal.key = msg.key();
+            this.state.messages[msgVal.key] = msgVal.message;
+            this.setState({messages: this.state.messages})
+        });
+
+        this.firebaseRef.on("child_removed", (msg)=>{
+            var key = msg.key();
+            delete this.state.messages[key];
+            this.setState({messages: this.state.messages})
         });
     }
 
     render(){
-        var messageNodes = this.state.messages.map((message)=> {
+        var messageNodes = _.values(this.state.messages).map((message)=> {
             return (
                 <Message message={message} />
             );

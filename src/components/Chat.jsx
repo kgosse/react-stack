@@ -2,6 +2,7 @@ import React from 'react';
 import MessageList from './MessageList.jsx';
 import ChannelList from './ChannelList.jsx';
 import MessageBox from './MessageBox.jsx';
+import ChatStore from '../stores/ChatStore';
 
 class Chat extends React.Component{
     render(){
@@ -20,6 +21,13 @@ class Chat extends React.Component{
                 <MessageBox />
             </div>
         )
+    }
+
+    static willTransitionTo(transition){
+        var state = ChatStore.getState();
+        if(!state.user){
+            transition.redirect('/login');
+        }
     }
 }
 

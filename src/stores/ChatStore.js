@@ -49,10 +49,10 @@ class ChatStore{
     receivedMessages(messages){
         _(messages)
             .keys()
-        .each((k)=>{
-            messages[k].key = k;
-        })
-        .value();
+            .each((k)=>{
+                messages[k].key = k;
+            })
+            .value();
 
         this.setState({
             messages,
@@ -63,11 +63,11 @@ class ChatStore{
     @bind(Actions.channelOpened)
     channelOpened(selectedChannel){
         _(this.state.channels)
-        .values()
-        .each((channel)=>{
-            channel.selected = false;
-        })
-        .value();
+            .values()
+            .each((channel)=>{
+                channel.selected = false;
+            })
+            .value();
 
         selectedChannel.selected = true;
 
@@ -86,10 +86,8 @@ class ChatStore{
             .keys()
             .each((key, index)=>{
                 channels[key].key = key;
-                if(index == 0){
-                    channels[key].selected = true;
+                if(channels[key].selected)
                     selectedChannel = channels[key];
-                }
             })
             .value();
 

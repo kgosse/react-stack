@@ -13,6 +13,7 @@ let routes = (
     <Route path="/" handler={App}>
         <DefaulRoute handler={Chat} />
         <Route path="chat" handler={Chat} />
+        <Route path="chat/:channel" handler={Chat} />
         <Route path="login" handler={Login} />
     </Route>
 );

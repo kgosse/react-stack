@@ -15,7 +15,7 @@ let MessageSource = {
                     return resolve();
 
                 firebaseRef.push({
-                    "messages": state.message,
+                    "message": state.message,
                     "date": new Date().toUTCString(),
                     "author": state.user.google.displayName,
                     "userId": state.user.uid,
@@ -39,6 +39,12 @@ let MessageSource = {
                 firebaseRef.once("value", (dataSnapshot)=>{
                     var messages = dataSnapshot.val();
                     resolve(messages);
+
+                    firebaseRef.on("child_added", (msg)=>{
+                        let msgVal = msg.val();
+                        msgVal.key = msg.key();
+                        Actions.messageReceived(msgVal);
+                    });
                 })
             })
         },

@@ -6,7 +6,7 @@ var {
     Card,
     CardText,
     RaisedButton
-} = mui;
+    } = mui;
 
 class Login extends React.Component{
     onClick(){
@@ -27,12 +27,13 @@ class Login extends React.Component{
                     To start chatting away, please log in with your google account
                 </CardText>
 
-                <RaisedButton style={{
-                    display: 'block'
-                }} onClick={this.onClick.bind(this)} label="Log in with google">
-
-                </RaisedButton>
-
+                <RaisedButton
+                    style={{
+                        display: 'block'
+                    }}
+                    primary={true}
+                    onClick={this.onClick.bind(this)} label="Log in with google"
+                />
             </Card>
         )
     }

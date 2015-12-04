@@ -3,10 +3,8 @@
  */
 
 import React from 'react';
-import MessageList from './MessageList.jsx';
-import ChannelList from './ChannelList.jsx';
-import MessageBox from './MessageBox.jsx';
 import Login from './Login.jsx';
+import Chat from './Chat.jsx';
 import mui from 'material-ui';
 import connectToStores from 'alt/utils/connectToStores';
 import ChatStore from '../stores/ChatStore'
@@ -49,23 +47,8 @@ class App extends React.Component{
     render(){
         var view = <Login />;
 
-        if(this.props.user){
-            view = (
-                <div>
-                    <div style={{
-                        display: 'flex',
-                        flexFlow: 'row wrap',
-                        maxWidth: 1200,
-                        width: '100%',
-                        margin: '30px auto 30px'
-                    }}>
-                        <ChannelList />
-                        <MessageList />
-                    </div>
-                    <MessageBox />
-                </div>
-            )
-        }
+        if(this.props.user)
+            view = <Chat />;
 
         return (
             <div>

@@ -3,17 +3,13 @@
  */
 
 import React from 'react';
-import Login from './Login.jsx';
-import Chat from './Chat.jsx';
 import mui from 'material-ui';
-import connectToStores from 'alt/utils/connectToStores';
-import ChatStore from '../stores/ChatStore'
+import {RouteHandler} from 'react-router';
 
 var ThemeManager = new mui.Styles.ThemeManager();
 var Colors = mui.Styles.Colors;
 var AppBar = mui.AppBar;
 
-@connectToStores
 class App extends React.Component{
     constructor(){
         super();
@@ -24,14 +20,6 @@ class App extends React.Component{
             primary3Color: Colors.blue100,
             accent1Color: Colors.pink400
         });
-    }
-
-    static getStores(){
-        return [ChatStore];
-    }
-
-    static getPropsFromStores(){
-        return ChatStore.getState();
     }
 
     static childContextTypes = {
@@ -45,15 +33,10 @@ class App extends React.Component{
     }
 
     render(){
-        var view = <Login />;
-
-        if(this.props.user)
-            view = <Chat />;
-
         return (
             <div>
                 <AppBar title="Awesome Chat App" />
-                {{view}}
+                <RouteHandler />
             </div>
         );
     }

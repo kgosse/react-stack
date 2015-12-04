@@ -8,6 +8,25 @@ import Firebase from 'firebase';
 let firebaseRef = null;
 
 let MessageSource = {
+    sendMessage: {
+        remote(state){
+            return new Promise((resolve, reject)=>{
+                if(!firebaseRef)
+                    return resolve();
+
+                firebaseRef.push({
+                    "messages": state.message,
+                    "date": new Date().toUTCString(),
+                    "author": state.user.google.displayName,
+                    "userId": state.user.uid,
+                    "profilePic": state.user.google.profileImageURL
+                });
+                resolve();
+            })
+        },
+        success: Actions.messageSendSuccess,
+        error: Actions.messageSendError
+    },
     getMessages: {
         remote(state){
             if(firebaseRef)

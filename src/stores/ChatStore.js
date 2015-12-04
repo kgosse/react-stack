@@ -19,6 +19,12 @@ class ChatStore{
         };
     }
 
+    @bind(Actions.sendMessage)
+    sendMessage(message){
+        this.state.message = message;
+        setTimeout(this.getInstance().sendMessage, 10);
+    }
+
     @bind(Actions.messagesLoading)
     messagesLoading(){
         this.setState({

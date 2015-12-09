@@ -1,6 +1,6 @@
 # Synopsis
 This project is based on Hendrik Swanepoel's [pluralsight tutorial](https://app.pluralsight.com/library/courses/build-isomorphic-app-react-flux-webpack-firebase/description).
-It is a simple chat application that aim to show how to build solid React apps with a stack composed of webpack, material-ui, flux, alt, and firebase. 
+It is a simple chat application that aims to show how to build solid React apps with a stack composed of webpack, material-ui, flux, alt, and firebase. 
 ![alt text][chatImage]
 
 [chatImage]: chat.png "chat screen"
